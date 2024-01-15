@@ -1,0 +1,32 @@
+/**
+ * @description css变量
+ * @extends https://v2.vuepress.vuejs.org/zh/reference/default-theme/styles.html#style-%E6%96%87%E4%BB%B6
+ */
+
+// 亮色模式
+:root {
+  --c-brand: #e5b55c;
+  --c-brand-light: #f2bf61;
+}
+
+// 暗色模式
+html.dark {
+  --c-brand: #e5b55c;
+  --c-brand-light: #f2bf61;
+}
+
+// 示例：Flappy Bird
+.flappy-bird {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 20px;
+
+  & > iframe {
+    flex: 1;
+    width: 100%;
+    max-width: 375px;
+    height: 70vh;
+    max-height: 667px;
+    border: none;
+  }
+}
