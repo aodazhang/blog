@@ -37,6 +37,7 @@ const navbar = [
         text: '编程语言',
         children: [
           { text: 'TypeScript', link: '/typescript/' },
+          { text: 'GLSL', link: '/glsl/' },
           { text: 'Markdown', link: '/markdown/' }
         ]
       },
