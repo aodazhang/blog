@@ -488,7 +488,7 @@ lowp vec2 position; // 低精度浮点型二维向量
 ### 算数运算符
 
 ```glsl
-// 1.普通计算
+// 1.数学计算
 +  -  *  /
 
 // 2.赋值计算
@@ -516,14 +516,18 @@ lowp vec2 position; // 低精度浮点型二维向量
 
 // 2.异或
 ^^
+```
 
-// 3.三元
+### 三元运算符
+
+```glsl
+// 1.三元
 expression ? a : b
 ```
 
 ## 7.控制语句
 
-### if-else
+### if-else 判断
 
 ```glsl
 if(x > 100){
@@ -535,7 +539,7 @@ if(x > 100){
 }
 ```
 
-### for
+### for 循环
 
 ```glsl
 for(int i = 0; i < 10; i++) {
@@ -547,7 +551,7 @@ for(int i = 0; i < 10; i++) {
 }
 ```
 
-### while
+### while 循环
 
 ```glsl
 int i = 0;
@@ -557,7 +561,7 @@ while (i < 10) {
 }
 ```
 
-### do-while
+### do-while 循环
 
 ```glsl
 int i = 0;
@@ -567,15 +571,15 @@ do {
 } while(i < 10)
 ```
 
-### discard
+### discard 舍弃
 
-常用于控制语句 if、for 中，可将不符合条件的片元舍弃，**仅用于片元着色器**。
+常用于其他控制语句中，可将不符合条件的片元舍弃，**仅用于片元着色器**。
 
 ```glsl
 void main() {
   // 1.计算片元坐标距离渲染点中心的距离
 	float r = distance(gl_PointCoord, vec2(0.5, 0.5));
-  // 2.距离几何中心半径 >= 0.5的片元舍弃
+  // 2.距离几何中心半径 < 0.5 的片元舍弃
   if(r < 0.5){
     discard;
   }
@@ -663,7 +667,7 @@ GLSL 的函数不支持递归。
 
 ```glsl
 // 1.定义设置分量 x 的函数
-float func(out vec3 point){
+float func(out vec3 point) {
   point.x = 2.0;
   return point.x * point.x;
 }
