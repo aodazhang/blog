@@ -1,7 +1,7 @@
 ---
 lang: zh-CN
-title: GLSL 语法
-sidebar: auto
+title: 基础语法
+# sidebar: auto
 ---
 
 ## 1.起步
@@ -407,47 +407,47 @@ uniform samplerCube uCubeDiffuse;
 
 :::
 
-### const
+### const 常量
 
-常量，定义后数据值不可修改。
+定义后数据值不可修改。
 
 ```glsl
 const float PI = 3.1415926;
 ```
 
-- 作用：声明一些不需要修改的参数，例如弧度。
+- 场景：声明一些不需要修改的参数，例如弧度。
 
-### uniform
+### uniform 全局变量
 
-全局变量，常用于向着色器传递参数，在所有着色器中值保持一致（所有顶点数据相同）。
+用于向着色器传递指定参数，必须声明在所有着色器代码之前，在所有着色器中值保持一致（所有顶点数据相同）。
 
 ```glsl
 uniform vec3 uColor;
 ```
 
-- 作用：声明非顶点相关的数据，例如复变矩阵、二维纹理。
+- 场景：声明非顶点相关的数据，例如复变矩阵、二维纹理。
 - 数据流：JavaScript -> 顶点着色器、片元着色器
 
-### attribute
+### attribute 顶点变量
 
-顶点变量，常与 buffer 结合向着色器传递逐顶点信息（每个顶点数据不同）。
+一般与 buffer 结合向着色器传递逐顶点信息（每个顶点数据不同）。
 
 ```glsl
 attribute vec2 aPosition;
 ```
 
-- 作用：声明顶点相关的数据，例如位置、颜色、法向量。
+- 场景：声明顶点相关的数据，例如位置、颜色、法向量。
 - 数据流：JavaScript -> 顶点着色器
 
-### varying
+### varying 传递变量
 
-传递变量，完成顶点着色器和片元着色器之间的数据传递和插值计算。
+用于顶点着色器和片元着色器之间的数据传递及插值计算。
 
 ```glsl
 varying vec2 vUv;
 ```
 
-- 作用：声明需要插值计算的顶点数据。
+- 场景：声明需要插值计算的顶点数据。
 - 数据流：顶点着色器 -> 片元着色器
 
 ## 5.精度限定符
@@ -727,153 +727,4 @@ void main() {
 float alpha = 0.5; // common.glsl 中定义的变量
 uniform vec3 color; // color.glsl 中定义的变量
 float cnoise() { } // lygia 中定义的柏林噪声函数
-```
-
-## 11.GLSL 内置函数
-
-::: warning 注意
-
-GLSL 内置函数的输入输出数据类型一般为：`float`、`vec2`、`vec3`、`vec4`。
-
-:::
-
-### 通用函数
-
-### 指数函数
-
-### 三角函数
-
-### 向量函数
-
-### 矩阵函数
-
-### 纹理函数
-
-## 12.GLSL 多平台内置变量
-
-### WebGL
-
-原生 WebGL 需配合 JavaScript 执行，也可通过 [glsl-canvas 插件](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas) 直接在 VSCode 中运行。
-
-```glsl
-/*
-WebGL 内置变量（可不声明直接使用）
-- float gl_PointSize：设置顶点尺寸，仅 顶点着色器 + 点绘制模式 生效。
-- vec4 gl_Position：设置顶点坐标，仅 顶点着色器 生效。
-- vec4 gl_FragColor：设置片元颜色，仅 片元着色器 生效。
-- vec2 gl_PointCoord：获取基于渲染坐标系的片元坐标，仅 片元着色器 生效。
-- vec3 gl_FragCoord：获取基于 Canvas 坐标系的片元坐标，仅 片元着色器 生效。
-- float gl_FragDepth：设置片元深度值，默认用 gl_FragCoord.z 设置，仅 片元着色器 生效。
-*/
-
-// 一.顶点着色器
-attribute vec4 aPosition; // js 传入顶点数据
-
-void main() {
-  // 1.设置顶点尺寸：点渲染模式生效 gl.drawArrays(gl.POINTS, 0, 点数量)
-  gl_PointSize = 20.0;
-
-  // 2.设置顶点坐标
-  gl_Position = aPosition;
-}
-
-// 二.片元着色器
-void main() {
-  // 1.设置片元颜色
-  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-
-  // 2.利用渲染坐标系的片元坐标绘制部分像素
-	float r = distance(gl_PointCoord, vec2(0.5, 0.5));
-  if(r < 0.5){
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  } else {
-    discard;
-  }
-
-  // 3.利用 Canvas 坐标系的片元坐标绘制渐变
-  gl_FragColor = vec4(gl_FragCoord.x / 500.0 * 1.0, 1.0, 0.0, 1.0);
-}
-```
-
-- gl_PointCoord 和 gl_FragCoord 的区别
-
-  ![image-20240118153528185](https://aodazhang.oss-cn-shanghai.aliyuncs.com/img/202401181535297.png)
-
-  - **gl_PointCoord**：相对渲染点的坐标，范围 `[0.0, 1.0]`。
-  - **gl_FragCoord**：相对 Canvas 画布的坐标，范围不限。
-
-### Three.js
-
-Three.js 一般在 **ShaderMaterial（物体材质）** 中处理 Shader 效果。
-
-```glsl
-/**
-* Three.js 传递变量（可不声明直接使用）
-* - attribute vec3 position：顶点坐标
-* - attribute vec3 normal：顶点法向量
-* - attribute vec2 uv：顶点 uv 坐标
-* - vec3 cameraPosition：相机坐标
-* - mat4 modelMatrix：模型矩阵
-* - mat4 viewMatrix：视图矩阵
-* - mat4 modelViewMatrix：模型视图矩阵 = 视图矩阵 x 模型矩阵
-* - mat4 projectionMatrix：投影矩阵
-*/
-
-// 一.顶点着色器
-varying vec2 vUv;
-varying vec3 vNormal;
-
-void main() {
-  // 1.最终顶点坐标 = 投影矩阵 * 模型视图矩阵 * 顶点坐标
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-
-  // 2.传递 uv 及法向量
-  vUv = uv;
-  vNormal = normal;
-}
-
-// 二.片元着色器
-varying vec2 vUv;
-varying vec3 vNormal;
-
-void main() {
-  // 1.设置片元颜色
-  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-}
-```
-
-### ShaderToy
-
-[ShaderToy](https://www.shadertoy.com/) 一般只使用片元着色器，可通过 [Shader Toy 插件](https://marketplace.visualstudio.com/items?itemName=stevensona.shader-toy) 直接在 VSCode 中运行。
-
-```glsl
-/*
-ShaderToy 内置变量（可不声明直接使用）
-- vec2 fragCoord：获取基于 Canvas 坐标系的片元坐标（等价于 gl_FragCoord）
-- vec4 fragColor：设置片元颜色（等价于 gl_FragColor）
-- vec4 iResolution：Cavans 整体大小，一般取 x、y 维度。
-- float iTime：Shader 开始执行到现在经过的时间。
-- vec2 iMouse：用户鼠标在 Canvas 的坐标。
-*/
-
-// ShaderToy 引入纹理
-#iChannel0"https://s2.loli.net/2023/09/10/QozT59R6KsYmb3q.jpg"
-#iChannel1"https://s2.loli.net/2023/09/10/Jb8mIhZMBElPiuC.jpg"
-
-/*
-ShaderToy 片元着色器主函数
-- fragColor：输出像素颜色
-- fragCoord：输入像素坐标
-*/
-void mainImage(out vec4 fragColor, in vec2 fragCoord){
-  // 1.获取当前片元 uv
-  vec2 uv = fragCoord / iResolution.xy;
-
-  // 2.根据 uv 提取纹理
-  vec4 tex0 = texture2D(iChannel0, uv);
-  vec4 tex1 = texture2D(iChannel1, uv);
-
-  // 3.绘制片元
-  fragColor=vec4(mix(tex0, tex1, 0.5).rgb, 1.0);
-}
 ```

@@ -43,6 +43,7 @@ function sidebarItem(text: string, prefixPath: string, sort?: string[]) {
 }
 
 const sidebar = {
+  '/glsl/': [sidebarItem('GLSL', '/glsl/', ['README', 'function', 'platform'])],
   '/canvas/': [sidebarItem('Canvas 绘图', '/canvas/', ['README', 'api'])],
   '/html-css/': [sidebarItem('HTML + CSS', '/html-css/', ['README'])],
   '/nestjs/': [sidebarItem('Nest.js 框架', '/nestjs/', ['README'])],
