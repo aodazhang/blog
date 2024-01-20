@@ -1,6 +1,6 @@
 ---
 lang: zh-CN
-title: 内置变量
+title: 平台
 # sidebar: auto
 ---
 

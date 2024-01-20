@@ -4,7 +4,57 @@ title: 内置函数
 # sidebar: auto
 ---
 
-## 1.通用函数
+## 1.条件函数
+
+### step 阶梯
+
+::: warning 注意
+
+在 Shader 中应该避免使用 if 语句，因为 if 的处理器分支切换特性会降低 GPU 并行处理能力。
+
+:::
+
+根据输入值和阈值的关系输出结果，`x <= edge` 返回 0.0、`x > edge` 返回 1.0，常用于替代 [if-else](/glsl/#if-else-判断)。
+
+```glsl
+/**
+ * edge：阈值。
+ * x：输入值。
+ */
+float step(float edge, float x)
+vec2 step(vec2 edge, vec2 x)
+vec3 step(vec3 edge, vec3 x)
+vec4 step(vec4 edge, vec4 x)
+```
+
+### smoothstep 平滑阶梯
+
+根据输入值和阈值的关系输出结果，`x < edge1` 返回 0.0、`x > edge2` 返回 1.0、`x 介于 edge1 和 edge2 之间` 返回平滑过渡值，常用于 SDF 图形边缘锯齿优化。该函数实现公式为 `3 * x^2 - 2 * x^3`。
+
+```glsl
+/**
+ * edge1：阈值 1。
+ * edge2：阈值 2。
+ * x：输入值。
+ */
+float smoothstep(float edge1, float edge2, float x)
+```
+
+### mix 混合
+
+根据输入值和插值系数的关系输出结果，`k 为 0` 返回 x、`k 为 1` 返回 y、`k 介于 0 和 1 之间` 返回 x 和 y 的线性插值，常用于颜色混合。该函数实现公式为 `x * (1.0 - k) + y * k`。
+
+```glsl
+/**
+ * x：输入值 1。
+ * y：输入值 2。
+ * k：插值系数，范围 [0, 1]。
+ */
+float mix(float x, float y, float k)
+vec2 mix(vec2 x, vec2 y, float k)
+vec3 mix(vec3 x, vec3 y, float k)
+vec4 mix(vec4 x, vec4 y, float k)
+```
 
 ## 2.指数函数
 
@@ -185,3 +235,27 @@ float degrees(float radians)
 ## 5.矩阵函数
 
 ## 6.纹理函数
+
+### texture2D 纹理采样
+
+根据 uv 从图片纹理中获取像素值。
+
+```glsl
+/**
+ * sampler：sampler2D 数据。
+ * uv：纹理坐标。
+ */
+vec4 texture2D(sampler2D sampler, vec2 uv)
+```
+
+### textureCube 立方体纹理采样
+
+根据 uv 从 立方体图片纹理中获取像素值。
+
+```glsl
+/**
+ * sampler：samplerCube 数据。
+ * uv：纹理坐标。
+ */
+vec4 textureCube(samplerCube sampler, vec3 uv)
+```

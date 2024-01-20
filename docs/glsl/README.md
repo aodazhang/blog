@@ -681,6 +681,27 @@ void main() {
 }
 ```
 
+### 重载
+
+GLSL 支持函数重载，可以为同名函数定义不同的参数及类型，在调用时编译器会根据参数列表自动判断具体调用函数。
+
+```glsl
+// 1.定义 test 函数重载
+vec2 test(vec2 a) {
+  return a;
+}
+vec3 test(vec3 a) {
+  return a;
+}
+vec4 test(vec4 a) {
+  return a;
+}
+
+// 2.编译器自动判断调用：vec3 test(vec3 a)
+vec3 b = vec3(1.0);
+b = test(b);
+```
+
 ## 10.编译预处理
 
 ::: warning 注意
