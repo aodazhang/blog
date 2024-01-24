@@ -56,7 +56,166 @@ vec3 mix(vec3 x, vec3 y, float k)
 vec4 mix(vec4 x, vec4 y, float k)
 ```
 
-## 2.指数函数
+### all 全部
+
+若 x 中所有元素都为 `true` 则返回 `true`，否则返回 `false`。
+
+```glsl
+/**
+ * x：输入值。
+ */
+bool all(bvec2 x)
+bool all(bvec3 x)
+bool all(bvec4 x)
+```
+
+### any 任意
+
+若 x 中有一个元素为 `true` 则返回 `true`，否则返回 `false`。
+
+```glsl
+/**
+ * x：输入值。
+ */
+bool any(bvec2 x)
+bool any(bvec3 x)
+bool any(bvec4 x)
+```
+
+## 2.数学函数
+
+### abs 绝对值
+
+返回 x 的绝对值，如果 x 是整型会被强制转换为浮点型。
+
+```glsl
+/**
+ * x：输入值。
+ */
+float abs(float x)
+```
+
+### sign 符号
+
+返回 x 的符号，正数为 `1.0`、负数为 `-1.0`、0 为 `0.0`。
+
+```glsl
+/**
+ * x：输入值，必须是 int、float 类型。
+ */
+float sign(float x)
+```
+
+### fract 返回小数
+
+返回 x 的小数部分，结果范围 `[0, 1]`。
+
+```glsl
+/**
+ * x：输入值。
+ */
+float fract(float x)
+```
+
+### round 四舍五入
+
+返回 x 的四舍五入整数。
+
+```glsl
+/**
+ * x：输入值。
+ */
+float round(float x)
+```
+
+### floor 向下取整
+
+返回小于等于 x 的最近整数。
+
+```glsl
+/**
+ * x：输入值。
+ */
+float floor(float x)
+```
+
+### ceil 向上取整
+
+返回大于等于 x 的最近整数。
+
+```glsl
+/**
+ * x：输入值。
+ */
+float ceil(float x)
+vec2 ceil(vec2 x)
+vec3 ceil(vec3 x)
+vec4 ceil(vec4 x)
+```
+
+### min 最小值
+
+返回输入值中的最小值，对于布尔类型会返回 `false`。
+
+```glsl
+/**
+ * x：输入值 1。
+ * y：输入值 2。
+ */
+float min(float x, float y)
+bool min(bool x, bool y)
+vec2 min(vec2 x, vec2 y)
+vec3 min(vec3 x, vec3 y)
+vec4 min(vec4 x, vec4 y)
+```
+
+### max 最大值
+
+返回输入值中的最大值。
+
+```glsl
+/**
+ * x：输入值 1。
+ * y：输入值 2。
+ */
+float max(float x, float y)
+vec2 max(vec2 x, vec2 y)
+vec3 max(vec3 x, vec3 y)
+vec4 max(vec4 x, vec4 y)
+```
+
+### clamp 中间值
+
+返回输入值中的中间值，等价于 `min(max(x, y), z)`。
+
+```glsl
+/**
+ * x：输入值 1。
+ * y：输入值 2。
+ * z：输入值 3。
+ */
+float clamp(float x, float y, float z)
+vec2 clamp(vec2 x, vec2 y, vec2 z)
+vec3 clamp(vec3 x, vec3 y, vec3 z)
+vec4 clamp(vec4 x, vec4 y, vec4 z)
+```
+
+### mod 取模
+
+返回被除数与除数的模（余数）。
+
+```glsl
+/**
+ * x：被除数。
+ * y：除数。
+ */
+float mod(float x, float y)
+vec2 mod(vec2 x, vec2 y, vec2 z)
+vec3 mod(vec3 x, vec3 y, vec3 z)
+vec4 mod(vec4 x, vec4 y, vec4 z)
+```
+
+## 3.指数函数
 
 ### pow 幂
 
@@ -140,7 +299,7 @@ float sqrt(x)
 float inversesqrt(float x)
 ```
 
-## 3.三角函数
+## 4.三角函数
 
 ### sin 正弦
 
@@ -230,11 +389,11 @@ float radians(float degrees)
 float degrees(float radians)
 ```
 
-## 4.向量函数
+## 5.向量函数
 
-## 5.矩阵函数
+## 6.矩阵函数
 
-## 6.纹理函数
+## 7.纹理函数
 
 ### texture2D 纹理采样
 
