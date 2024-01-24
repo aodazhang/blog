@@ -391,6 +391,108 @@ float degrees(float radians)
 
 ## 5.向量函数
 
+### length 向量长度
+
+计算向量 x 的长度。
+
+```glsl
+/**
+ * x：向量。
+ */
+float length(vec2 x)
+float length(vec3 x)
+float length(vec4 x)
+```
+
+### distance 向量距离
+
+计算向量 x 与向量 y 的欧几里得距离。
+
+```glsl
+/**
+ * x：向量 1。
+ * y：向量 2。
+ */
+float distance(vec2 x, vec2 y)
+float distance(vec3 x, vec3 y)
+float distance(vec4 x, vec4 y)
+```
+
+### dot 向量点乘
+
+计算向量 x 与向量 y 的点乘（内积）。点乘代表两者的模和两者的夹角余弦值的乘积，对应公式 `|a| * |b| * cosθ`，几何意义是 x 向量在 y 向量上的投影长度和 y 向量长度相乘。
+
+```glsl
+/**
+ * x：向量 1。
+ * y：向量 2。
+ */
+float dot(vec2 x, vec2 y)
+float dot(vec3 x, vec3 y)
+float dot(vec4 x, vec4 y)
+```
+
+### cross 向量叉乘
+
+计算向量 x 与向量 y 的叉乘，返回垂直于两个向量的第三个向量。叉乘代表两者的模和两者的夹角正弦值的乘积，对应公式 `|a| * |b| * sinθ`，几何意义是两个向量构成的平行六面体体积。
+
+```glsl
+/**
+ * x：向量 1。
+ * y：向量 2。
+ */
+vec3 cross(vec3 x, vec3 y)
+```
+
+### normalize 向量归一化
+
+规范化向量 x 长度为 1 的单位向量。
+
+```glsl
+/**
+ * x：向量。
+ */
+vec3 normalize(vec3 x)
+```
+
+### reflect 反射向量
+
+根据入射向量 I 和法向量 N 计算反射向量。
+
+```glsl
+/**
+ * I：入射向量（必须归一化）。
+ * N：法向量（必须归一化）。
+ */
+vec3 reflect(vec3 I, vec3 N)
+```
+
+### refract 折射向量
+
+根据入射向量 I、法向量 N 和折射率 eta 计算折射向量。
+
+```glsl
+/**
+ * I：入射向量（必须归一化）。
+ * N：法向量（必须归一化）。
+ * eta：折射率（必须大于 0）。
+ */
+vec3 refract(vec3 I, vec3 N, float eta)
+```
+
+### faceforward 向量朝向
+
+根据入射向量 I 和表面法向量 Nref 的方向（点乘结果），返回 `N` 或 `-N`。
+
+```glsl
+/**
+ * N：法向量（必须归一化）。
+ * I：入射向量（必须归一化）。
+ * Nref：表面线向量（必须归一化）。
+ */
+vec3 faceforward(vec3 N, vec3 I, vec3 Nref)
+```
+
 ## 6.矩阵函数
 
 ## 7.纹理函数
