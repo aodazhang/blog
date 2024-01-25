@@ -495,6 +495,59 @@ vec3 faceforward(vec3 N, vec3 I, vec3 Nref)
 
 ## 6.矩阵函数
 
+### matrixCompMult 矩阵相乘
+
+两个矩阵同行同列元素相乘，非线性代数规则（线性代数直接使用 `*` 运算即可）。
+
+```glsl
+/**
+ * x：矩阵 1。
+ * y：矩阵 2。
+ */
+mat2 matrixCompMult(mat2 x, mat2 y)
+mat3 matrixCompMult(mat3 x, mat3 y)
+mat4 matrixCompMult(mat4 x, mat4 y)
+```
+
+### transpose 转置矩阵
+
+返回 m 的转置矩阵。
+
+```glsl
+/**
+ * m：矩阵。
+ */
+mat2 transpose(mat2 m)
+mat3 transpose(mat3 m)
+mat4 transpose(mat4 m)
+```
+
+### inverse 逆矩阵
+
+返回 m 的逆矩阵。
+
+```glsl
+/**
+ * m：矩阵。
+ */
+mat2 inverse(mat2 m)
+mat3 inverse(mat3 m)
+mat4 inverse(mat4 m)
+```
+
+### determinant 矩阵行列式
+
+返回 x 的矩阵行列式计算结果。
+
+```glsl
+/**
+ * x：矩阵。
+ */
+float determinant(mat2 x)
+float determinant(mat3 x)
+float determinant(mat4 x)
+```
+
 ## 7.纹理函数
 
 ### texture2D 纹理采样
