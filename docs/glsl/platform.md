@@ -57,7 +57,7 @@ void main() {
 
 ## 2.Three.js 平台
 
-Three.js 一般在 **ShaderMaterial（物体材质）** 中处理 Shader 效果。
+Three.js 一般在 [ShaderMaterial](https://threejs.org/docs/index.html#api/zh/materials/ShaderMaterial) 中处理 Shader 效果，具体可用变量请参考 [WebGLProgram.js](https://github.com/mrdoob/three.js/blob/dev/src/renderers/webgl/WebGLProgram.js#L661)。
 
 ```glsl
 /**
@@ -65,29 +65,28 @@ Three.js 一般在 **ShaderMaterial（物体材质）** 中处理 Shader 效果�
 * - attribute vec3 position：顶点坐标
 * - attribute vec3 normal：顶点法向量
 * - attribute vec2 uv：顶点 uv 坐标
-* - vec3 cameraPosition：相机坐标
-* - mat4 modelMatrix：模型矩阵
-* - mat4 viewMatrix：视图矩阵
-* - mat4 modelViewMatrix：模型视图矩阵 = 视图矩阵 x 模型矩阵
-* - mat4 projectionMatrix：投影矩阵
+* - uniform mat4 modelViewMatrix：模型视图矩阵 = 视图矩阵 x 模型矩阵
+*   - uniform mat4 modelMatrix：模型矩阵
+*   - uniform mat4 viewMatrix：视图矩阵
+* - uniform mat4 projectionMatrix：投影矩阵
+* - uniform vec3 cameraPosition：相机坐标
+* - uniform bool isOrthographic：是否正交投影相机
+* - uniform mat3 normalMatrix：法线矩阵，用于将顶点着色器的法向量转换为相机空间中的法向量
 */
 
 // 一.顶点着色器
 varying vec2 vUv;
-varying vec3 vNormal;
 
 void main() {
   // 1.最终顶点坐标 = 投影矩阵 * 模型视图矩阵 * 顶点坐标
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 
-  // 2.传递 uv 及法向量
+  // 2.传递 uv
   vUv = uv;
-  vNormal = normal;
 }
 
 // 二.片元着色器
 varying vec2 vUv;
-varying vec3 vNormal;
 
 void main() {
   // 1.设置片元颜色
