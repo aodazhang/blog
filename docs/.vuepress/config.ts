@@ -9,7 +9,7 @@ import sidebar from './sidebar'
 
 export default defineUserConfig({
   // 一.站点配置
-  base: '/',
+  base: '/blog/', // 静态资源根路径
   lang: 'zh-CN', // <html lang="zh-CN"></html>
   title: '空闲星', // <title>空闲星</title>
   description: '技术交流与分享', // <meta name="description" content="技术交流与分享">
