@@ -67,20 +67,20 @@ const navbar = [
           { text: 'aoda.css', link: '/aoda-css/' },
           { text: 'ecs-lite', link: '/ecs-lite/' }
         ]
-      },
-      {
-        text: 'Project',
-        children: [
-          {
-            text: '淘豆购票（用户端）',
-            link: 'https://project.aodazhang.com/taodou-ticket'
-          },
-          {
-            text: '淘豆购票（管理端）',
-            link: 'https://project.aodazhang.com/taodou-ticket-admin'
-          }
-        ]
       }
+      // {
+      //   text: 'Project',
+      //   children: [
+      //     {
+      //       text: '淘豆购票（用户端）',
+      //       link: 'https://project.aodazhang.com/taodou-ticket'
+      //     },
+      //     {
+      //       text: '淘豆购票（管理端）',
+      //       link: 'https://project.aodazhang.com/taodou-ticket-admin'
+      //     }
+      //   ]
+      // }
     ]
   }
 ]
