@@ -61,13 +61,15 @@ const navbar = [
   {
     text: '实验室',
     children: [
-      {
-        text: 'Library',
-        children: [
-          { text: 'aoda.css', link: '/aoda-css/' },
-          { text: 'ecs-lite', link: '/ecs-lite/' }
-        ]
-      }
+      { text: 'aoda.css', link: '/aoda-css/' },
+      { text: 'ecs-lite', link: '/ecs-lite/' }
+      // {
+      //   text: 'Library',
+      //   children: [
+      //     { text: 'aoda.css', link: '/aoda-css/' },
+      //     { text: 'ecs-lite', link: '/ecs-lite/' }
+      //   ]
+      // }
       // {
       //   text: 'Project',
       //   children: [
